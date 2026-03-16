@@ -22,9 +22,11 @@ public class TestBase : IAsyncLifetime
         Headless = Settings.Headless
     });
 
+    // Cố định viewport tương đương màn 14" (ví dụ 1366x768) để dễ bắt element.
     var context = await Browser.NewContextAsync(new BrowserNewContextOptions
     {
         BaseURL = Settings.BaseUrl
+        //ViewportSize = new ViewportSize { Width = 1180, Height = 820 }
     });
 
     Page = await context.NewPageAsync();

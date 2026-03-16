@@ -10,9 +10,9 @@ namespace Xspire.E2E.Playwright.Tests.Auth;
 
 /// <summary>
 /// Login Validation Suite - maps to TS LoginValidationSuite.spec.ts (TC-LOGIN-001 .. TC-LOGIN-008).
-/// Runs sequentially (no parallel) to keep shared browser session consistent.
+/// 1 class = 1 browser (TestBase), các test case trong class chạy nối tiếp.
 /// </summary>
-[Collection("LoginSuite")]
+[Collection("E2ESuite")]
 public class LoginTests : IClassFixture<TestBase>
 {
     private readonly TestBase _fixture;

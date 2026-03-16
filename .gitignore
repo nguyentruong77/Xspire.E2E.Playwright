@@ -22,6 +22,9 @@ test-results/
 playwright-report/
 trace.zip
 
+# Docs
+docs/
+
 # Misc
 *.log
 *.cache

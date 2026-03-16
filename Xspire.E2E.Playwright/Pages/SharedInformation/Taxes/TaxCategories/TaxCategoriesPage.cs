@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Xspire.E2E.Playwright.Config;
 
-namespace Xspire.E2E.Playwright.Pages.SharedInformation.Taxes;
+namespace Xspire.E2E.Playwright.Pages.SharedInformation.Taxes.TaxCategories;
 
 /// <summary>
 /// Represents the Tax Categories screen under Shared Information &gt; Taxes.
@@ -32,7 +32,9 @@ public class TaxCategoriesPage
     }
 
     // Buttons on list screen
-    public ILocator ButtonNew => _page.GetByRole(Microsoft.Playwright.AriaRole.Button, new() { Name = "New" }).First;
+    // New button - ưu tiên locator theo thuộc tính ổn định thay vì XPath tuyệt đối
+    public ILocator ButtonNew =>
+        _page.GetByRole(Microsoft.Playwright.AriaRole.Button, new() { Name = "New" }).First;
     public ILocator ButtonEdit => _page.GetByRole(Microsoft.Playwright.AriaRole.Button, new() { Name = "Edit" }).First;
 
     /// <summary>Opens the New Tax Category form (modal or new screen).</summary>
