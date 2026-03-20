@@ -56,14 +56,16 @@ public class CountriesNewPage
         _page.Locator("input[name='ne_Txt_Description']");
 
     /// <summary>
-    /// Combobox Time Zone (dxbl-combo-box id = "ne_Cbx_TimeZoneInformationId").
-    /// Dùng input bên trong role=\"combobox\" và nút dropdown bên phải để thao tác.
+    /// Combobox Time Zone: id trên dxbl-combo-box không còn cố định; neo theo form layout item thứ 2
+    /// (cùng cấu trúc DOM: form/dxbl-form-layout/div/dxbl-form-layout-item[2]/div/dxbl-combo-box/...).
     /// </summary>
-    public ILocator TimeZoneComboInput =>
-        _page.Locator("dxbl-combo-box#ne_Cbx_TimeZoneInformationId input[role='combobox']");
+    private ILocator TimeZoneComboBox =>
+        _page.Locator("xpath=//form/dxbl-form-layout/div/dxbl-form-layout-item[2]/div/dxbl-combo-box");
+
+    public ILocator TimeZoneComboInput => TimeZoneComboBox.Locator("input");
 
     public ILocator TimeZoneDropdownButton =>
-        _page.Locator("#ne_Cbx_TimeZoneInformationId .dxbl-btn-group-right button");
+        TimeZoneComboBox.Locator(".dxbl-btn-group-right button");
 
     // ===== Toolbar buttons (Back / Save) =====
 
