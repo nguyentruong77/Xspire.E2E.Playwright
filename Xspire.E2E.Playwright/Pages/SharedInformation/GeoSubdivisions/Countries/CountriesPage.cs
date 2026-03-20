@@ -100,17 +100,13 @@ public class CountriesPage
 
     public ILocator ButtonNew => GetToolbarButton("New");
 
-    public ILocator ButtonSearch => GetToolbarButton("Search");
-
-    /// <summary>Ô search trên màn list (full XPath – có thể đổi sang selector ổn định hơn sau).</summary>
-    public ILocator SearchInput =>
-        _page.Locator("xpath=/html/body/div[3]/div/div[2]/div/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/dxbl-input-editor/input");
-
-    /// <summary>Gõ mã vào ô search (grid có thể filter khi Enter hoặc blur – tuỳ UI).</summary>
+    /// <summary>Gõ mã lọc grid: focus bằng role textbox rồi fill + Enter.</summary>
     public async Task FillSearchAsync(string code)
     {
-        await SearchInput.FillAsync(code);
-        await SearchInput.PressAsync("Enter");
+        var textbox = _page.GetByRole(AriaRole.Textbox).First;
+        await textbox.ClickAsync();
+        await textbox.FillAsync(code);
+        await textbox.PressAsync("Enter");
         await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
     }
 
@@ -121,7 +117,8 @@ public class CountriesPage
     public async Task EnsureSearchSuccessAsync(string expectedCode)
     {
         var timeout = _settings.StandardTimeoutMs;
-        await Assertions.Expect(SearchInput).ToHaveValueAsync(expectedCode, new() { Timeout = timeout });
+        var textbox = _page.GetByRole(AriaRole.Textbox).First;
+        await Assertions.Expect(textbox).ToHaveValueAsync(expectedCode, new() { Timeout = timeout });
 
         var exactCodeCell = _page.Locator("td[data-caption='Code']").Filter(new LocatorFilterOptions
         {
