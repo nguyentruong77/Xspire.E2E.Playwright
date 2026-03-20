@@ -24,6 +24,9 @@ public class HomePage
     // Menu item "Shared Information" trên sidebar trái (có thể có 2 bản: desktop + mobile → chọn cái đầu)
     private ILocator SharedInformationMenuItem => _page.Locator("#MenuItem_SI").First;
 
+    // Menu item "Inventory" trên sidebar trái
+    private ILocator InventoryMenuItem => _page.Locator("#MenuItem_IN").First;
+
     // Hành vi logout: click avatar -> click Logout
     public async Task LogoutAsync()
     {
@@ -35,6 +38,13 @@ public class HomePage
     public async Task NavigateToSharedInformationAsync()
     {
         await SharedInformationMenuItem.ClickAsync();
+        await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+    }
+
+    // Điều hướng sang trang Inventory qua menu trái
+    public async Task NavigateToInventoryAsync()
+    {
+        await InventoryMenuItem.ClickAsync();
         await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
     }
 }
