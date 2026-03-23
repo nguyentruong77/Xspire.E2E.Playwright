@@ -30,5 +30,16 @@ public static class TaxCategoriesTestData
         public const string Code = "VAT500";
         public const string Description = "Test Nhóm VAT 500% (duplicate)";
     }
+
+    /// <summary>Code dùng search/edit/delete sau khi tạo bằng <see cref="CreateValid"/>.</summary>
+    public static class SearchSuccess
+    {
+        public const string Code = CreateValid.Code;
+    }
+
+    public static class EditDescription
+    {
+        public const string NewDescription = "Test Nhóm VAT 500% (edited)";
+    }
 }
 
