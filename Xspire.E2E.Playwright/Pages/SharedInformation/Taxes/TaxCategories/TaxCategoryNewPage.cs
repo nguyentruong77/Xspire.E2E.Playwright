@@ -28,6 +28,21 @@ public class TaxCategoryNewPage
         await Assertions.Expect(_page).ToHaveURLAsync(new System.Text.RegularExpressions.Regex(".*TaxCategories/00000000-0000-0000-0000-000000000000.*"));
     }
 
+    /// <summary>
+    /// Ensure đang ở màn Edit: URL có GUID thật và Code khớp.
+    /// </summary>
+    public async Task EnsureOnEditPageAsync(string expectedCode)
+    {
+        await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+        await Assertions.Expect(_page).ToHaveURLAsync(
+            new System.Text.RegularExpressions.Regex(
+                ".*TaxCategories/(?!00000000-0000-0000-0000-000000000000).+"),
+            new() { Timeout = _settings.StandardTimeoutMs });
+
+        await Assertions.Expect(InputCode).ToHaveValueAsync(expectedCode);
+    }
+
     // Tab/breadcrumb "Tax Categories - New" (chỉ đúng khi dùng tiếng Anh)
     public ILocator TabNew => _page.GetByText("Tax Categories - New", new() { Exact = true });
 
@@ -69,6 +84,8 @@ public class TaxCategoryNewPage
         await InputCode.FillAsync(TaxCategoriesTestData.CreateMissingDescription.Code);
         await InputDescription.FillAsync(TaxCategoriesTestData.CreateMissingDescription.Description);
     }
+
+    public Task FillDescriptionOnlyAsync(string description) => InputDescription.FillAsync(description);
 
     public async Task ClickSaveAsync()
     {
