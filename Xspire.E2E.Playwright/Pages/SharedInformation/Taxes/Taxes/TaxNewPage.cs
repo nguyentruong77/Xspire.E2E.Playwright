@@ -136,7 +136,7 @@ public class TaxNewPage
         await SelectFirstItemFromOpenedDropdownAsync(
             CalculationRuleDropDownButton,
             null,
-            TaxesTestData.CreateValid.CalculationRuleSearchText);
+            null);
     }
 
     private async Task SelectFirstItemFromOpenedDropdownAsync(
@@ -174,14 +174,7 @@ public class TaxNewPage
             return;
         }
 
-        var anyOption = _page.Locator(".dxbl-list-box-item, .dxbl-list-item, [role='option']").First;
-        if (await anyOption.CountAsync() > 0)
-        {
-            await anyOption.ClickAsync(new LocatorClickOptions { Force = true });
-            return;
-        }
-
-        // Last fallback: if popup captured focus, select first item by keyboard.
+        // Fallback: if popup captured focus, choose the first item by keyboard.
         await _page.Keyboard.PressAsync("ArrowDown");
         await _page.Keyboard.PressAsync("Enter");
     }
