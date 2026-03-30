@@ -43,42 +43,56 @@ public class WarehouseNewPage
     // ===== Form fields (ne_Txt_* / ne_Chk_* — ổn định theo name, tránh id GUID) =====
 
     /// <summary>Textbox Code — name/parent-id cố định; id class dxbl-text-edit-input có thể đổi mỗi render.</summary>
-    public ILocator InputCode => _page.Locator("input[name='ne_Txt_Code']");
+    public ILocator InputCode => _page.Locator("input[name='ne_Txt_Code']").Filter(new LocatorFilterOptions { Visible = true });
 
-    public ILocator InputDescription => _page.Locator("input[name='ne_Txt_Description']");
+    public ILocator InputDescription => _page.Locator("input[name='ne_Txt_Description']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Account Name — name/parent-id cố định; id class có thể đổi mỗi render.</summary>
-    public ILocator InputAccountName => _page.Locator("input[name='ne_Txt_AccountName']");
+    public ILocator InputAccountName => _page.Locator("input[name='ne_Txt_AccountName']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Email — name/parent-id cố định.</summary>
-    public ILocator InputEmail => _page.Locator("input[name='ne_Txt_Email']");
+    public ILocator InputEmail => _page.Locator("input[name='ne_Txt_Email']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Web — name/parent-id cố định.</summary>
-    public ILocator InputWeb => _page.Locator("input[name='ne_Txt_Web']");
+    public ILocator InputWeb => _page.Locator("input[name='ne_Txt_Web']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Phone1 — name/parent-id cố định.</summary>
-    public ILocator InputPhone1 => _page.Locator("input[name='ne_Txt_Phone1']");
+    public ILocator InputPhone1 => _page.Locator("input[name='ne_Txt_Phone1']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Phone2 — name/parent-id cố định.</summary>
-    public ILocator InputPhone2 => _page.Locator("input[name='ne_Txt_Phone2']");
+    public ILocator InputPhone2 => _page.Locator("input[name='ne_Txt_Phone2']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Fax — name/parent-id cố định.</summary>
-    public ILocator InputFax => _page.Locator("input[name='ne_Txt_Fax']");
+    public ILocator InputFax => _page.Locator("input[name='ne_Txt_Fax']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Attention — name/parent-id cố định.</summary>
-    public ILocator InputAttention => _page.Locator("input[name='ne_Txt_Attention']");
+    public ILocator InputAttention => _page.Locator("input[name='ne_Txt_Attention']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Address Line 1 — name/parent-id cố định.</summary>
-    public ILocator InputAddressLine1 => _page.Locator("input[name='ne_Txt_AddressLine1']");
+    public ILocator InputAddressLine1 => _page.Locator("input[name='ne_Txt_AddressLine1']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Address Line 2 — name/parent-id cố định.</summary>
-    public ILocator InputAddressLine2 => _page.Locator("input[name='ne_Txt_AddressLine2']");
+    public ILocator InputAddressLine2 => _page.Locator("input[name='ne_Txt_AddressLine2']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Postal Code — name/parent-id cố định.</summary>
-    public ILocator InputPostalCode => _page.Locator("input[name='ne_Txt_PostalCode']");
+    public ILocator InputPostalCode => _page.Locator("input[name='ne_Txt_PostalCode']").Filter(new LocatorFilterOptions { Visible = true });
 
     /// <summary>Textbox Carrier Facility — name/parent-id cố định.</summary>
-    public ILocator InputCarrierFacility => _page.Locator("input[name='ne_Txt_CarrierFacility']");
+    public ILocator InputCarrierFacility => _page.Locator("input[name='ne_Txt_CarrierFacility']").Filter(new LocatorFilterOptions { Visible = true });
+
+    /// <summary>Memo Geography (read-only path) — <c>dxbl-memo-editor id="ne_Memo_GeographyPath"</c>.</summary>
+    public ILocator MemoGeographyPath => _page.Locator("textarea[name='ne_Memo_GeographyPath']");
+
+    /// <summary>Memo Territory (read-only display) — <c>dxbl-memo-editor id="ne_Memo_TerritoryDisplay"</c>.</summary>
+    public ILocator MemoTerritoryDisplay => _page.Locator("textarea[name='ne_Memo_TerritoryDisplay']");
+
+    /// <summary>Nút icon bên phải ô Email (envelope) trong <c>dxbl-input-editor#ne_Txt_Email</c>.</summary>
+    public ILocator EmailTextEditActionButton =>
+        _page.Locator("dxbl-input-editor#ne_Txt_Email").Locator("button.dxbl-text-edit-btn");
+
+    /// <summary>Nút icon bên phải ô Web (external link) trong <c>dxbl-input-editor#ne_Txt_Web</c>.</summary>
+    public ILocator WebTextEditActionButton =>
+        _page.Locator("dxbl-input-editor#ne_Txt_Web").Locator("button.dxbl-text-edit-btn");
 
     public ILocator CheckboxActive => _page.Locator("input[type='checkbox'][name='ne_Chk_Active']");
 
@@ -296,6 +310,10 @@ public class WarehouseNewPage
     public ILocator TerritoryPopupButton =>
         _page.Locator("button#ne_Btn_TerritoryPopup[type='button']");
 
+    /// <summary>Nút Territory popup khi <c>disabled</c> (trước khi chọn Geography, v.v.).</summary>
+    public ILocator TerritoryPopupButtonDisabled =>
+        _page.Locator("button#ne_Btn_TerritoryPopup[disabled]");
+
     /// <summary>
     /// Chọn giá trị trong combobox Loại kho (mở dropdown, filter, chọn option theo text hiển thị).
     /// </summary>
@@ -464,6 +482,179 @@ public class WarehouseNewPage
         });
         await tab.ClickAsync();
         await Assertions.Expect(tab).ToHaveAttributeAsync("aria-selected", "true");
+    }
+
+    // ===== Companies tab (nhóm + grid trong tab Companies) =====
+
+    /// <summary>Nút Add Companies trong header nhóm <c>Companies</c>.</summary>
+    public ILocator ButtonAddCompaniesWarehouse =>
+        _page.Locator("button#ne_Btn_AddCompanies_Warehouse[type='button']");
+
+    /// <summary>Checkbox "Exclude selected companies" — <c>name="chk_ExcludeAllCompanies_Warehouse"</c>.</summary>
+    public ILocator CheckboxExcludeAllCompaniesWarehouse =>
+        _page.Locator("input[type='checkbox'][name='chk_ExcludeAllCompanies_Warehouse']");
+
+    /// <summary>
+    /// Nhóm form layout chứa nút <c>ne_Btn_AddCompanies_Warehouse</c> (tránh nhầm grid tab khác).
+    /// </summary>
+    private ILocator CompaniesFormLayoutGroup =>
+        _page.Locator("dxbl-form-layout-group").Filter(new LocatorFilterOptions
+        {
+            Has = ButtonAddCompaniesWarehouse
+        });
+
+    /// <summary>Grid Company trong tab Companies (<c>hqsoft-grid</c> trong cùng nhóm).</summary>
+    public ILocator CompaniesGrid => CompaniesFormLayoutGroup.Locator("dxbl-grid.hqsoft-grid");
+
+    /// <summary>Hàng thêm Company inline mới (<c>dxbl-grid-edit-new-item-row-inplace</c>).</summary>
+    public ILocator CompaniesGridNewItemRow =>
+        CompaniesGrid.Locator("tr.dxbl-grid-edit-new-item-row-inplace");
+
+    /// <summary>Icon cảnh báo required trong ô Company (snippet: <c>validation-warning.svg</c> + title).</summary>
+    public ILocator CompaniesGridCompanyRequiredWarning =>
+        CompaniesGridNewItemRow.Locator("img[title='This field is required.']");
+
+    public async Task ClickAddCompaniesAsync()
+    {
+        await ButtonAddCompaniesWarehouse.First.WaitForAsync(new LocatorWaitForOptions
+        {
+            State = WaitForSelectorState.Visible,
+            Timeout = _settings.StandardTimeoutMs
+        });
+        await ButtonAddCompaniesWarehouse.First.ClickAsync();
+        await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+    }
+
+    // ===== Modal "Add Companies" (popup chọn công ty) =====
+    // Các id/name trong modal thường là GUID; ưu tiên title, data-qa, placeholder, nhãn cột.
+
+    /// <summary>Viền nội dung modal có tiêu đề <c>Add Companies</c>.</summary>
+    public ILocator AddCompaniesModal =>
+        _page.Locator(".dxbl-modal-content").Filter(new LocatorFilterOptions
+        {
+            Has = _page.Locator("span.dxbl-modal-title").Filter(new LocatorFilterOptions
+            {
+                HasTextString = "Add Companies"
+            })
+        });
+
+    public ILocator AddCompaniesModalCloseButton =>
+        AddCompaniesModal.Locator("[data-qa-selector='dx-popup-close-button']");
+
+    public ILocator AddCompaniesModalFilterCodeInput =>
+        AddCompaniesModal.Locator("dxbl-input-editor[placeholder='Code'] input.dxbl-text-edit-input");
+
+    public ILocator AddCompaniesModalFilterCompanyNameInput =>
+        AddCompaniesModal.Locator("dxbl-input-editor[placeholder='Company Name'] input.dxbl-text-edit-input");
+
+    private ILocator AddCompaniesModalCountryFormGroup =>
+        AddCompaniesModal.Locator("div.form-group").Filter(new LocatorFilterOptions
+        {
+            Has = _page.Locator("label.form-label").Filter(new LocatorFilterOptions { HasTextString = "Country" })
+        });
+
+    private ILocator AddCompaniesModalCountryComboHost =>
+        AddCompaniesModalCountryFormGroup.Locator("dxbl-combo-box");
+
+    public ILocator AddCompaniesModalCountryComboInput =>
+        AddCompaniesModalCountryComboHost.Locator("input[role='combobox']");
+
+    public ILocator AddCompaniesModalCountryDropdownButton =>
+        AddCompaniesModalCountryComboHost.Locator(".dxbl-btn-group-right button");
+
+    private ILocator AddCompaniesModalSelectGeographyFormGroup =>
+        AddCompaniesModal.Locator("div.form-group").Filter(new LocatorFilterOptions
+        {
+            Has = _page.Locator("label.form-label").Filter(new LocatorFilterOptions
+            {
+                HasTextString = "Select Geography"
+            })
+        });
+
+    private ILocator AddCompaniesModalTerritoryFormGroup =>
+        AddCompaniesModal.Locator("div.form-group").Filter(new LocatorFilterOptions
+        {
+            Has = _page.Locator("label.form-label").Filter(new LocatorFilterOptions { HasTextString = "Territory" })
+        });
+
+    /// <summary>Memo đường dẫn Geography (readonly) trong modal.</summary>
+    public ILocator AddCompaniesModalGeographyMemo =>
+        AddCompaniesModalSelectGeographyFormGroup.Locator("textarea");
+
+    /// <summary>Memo Territory (readonly) trong modal.</summary>
+    public ILocator AddCompaniesModalTerritoryMemo =>
+        AddCompaniesModalTerritoryFormGroup.Locator("textarea");
+
+    /// <summary>Nút popup <c>...</c> cạnh Geography (có thể <c>disabled</c>).</summary>
+    public ILocator AddCompaniesModalGeographyPickerButton =>
+        AddCompaniesModalSelectGeographyFormGroup.Locator("button.dxbl-btn-standalone");
+
+    /// <summary>Nút popup <c>...</c> cạnh Territory (có thể <c>disabled</c>).</summary>
+    public ILocator AddCompaniesModalTerritoryPickerButton =>
+        AddCompaniesModalTerritoryFormGroup.Locator("button.dxbl-btn-standalone");
+
+    public ILocator AddCompaniesModalButtonClearFilters =>
+        AddCompaniesModal.GetByRole(AriaRole.Button, new() { Name = "Clear Filters" });
+
+    /// <summary>Search cùng hàng với Clear Filters (bộ lọc phía trên).</summary>
+    public ILocator AddCompaniesModalButtonApplyFilterSearch =>
+        AddCompaniesModal.Locator("div.row.mt-3.mb-2").GetByRole(AriaRole.Button, new() { Name = "Search" });
+
+    public ILocator AddCompaniesModalQuickSearchInput =>
+        AddCompaniesModal.Locator("dxbl-input-editor[placeholder='Search'] input.dxbl-text-edit-input");
+
+    /// <summary>Nút Search cạnh ô quick search (cột 2).</summary>
+    public ILocator AddCompaniesModalQuickSearchButton =>
+        AddCompaniesModal.Locator("div.row").Filter(new LocatorFilterOptions
+        {
+            Has = AddCompaniesModal.Locator("dxbl-input-editor[placeholder='Search']")
+        }).GetByRole(AriaRole.Button, new() { Name = "Search" });
+
+    public ILocator AddCompaniesModalButtonAdvancedFilters =>
+        AddCompaniesModal.GetByRole(AriaRole.Button, new() { Name = "Advanced filters" });
+
+    /// <summary>Bảng kết quả (Bootstrap <c>b-datagrid compact-grid</c>).</summary>
+    public ILocator AddCompaniesModalResultsTable =>
+        AddCompaniesModal.Locator("table.b-datagrid.compact-grid");
+
+    public ILocator AddCompaniesModalSelectableRows =>
+        AddCompaniesModalResultsTable.Locator("tbody tr.table-row-selectable");
+
+    public ILocator AddCompaniesModalButtonCancel =>
+        AddCompaniesModal.Locator(".dxbl-modal-footer").GetByRole(AriaRole.Button, new() { Name = "Cancel" });
+
+    public ILocator AddCompaniesModalButtonConfirm =>
+        AddCompaniesModal.Locator(".dxbl-modal-footer").GetByRole(AriaRole.Button, new() { Name = "Add Companies" });
+
+    public async Task EnsureAddCompaniesModalVisibleAsync()
+    {
+        await AddCompaniesModal.First.WaitForAsync(new LocatorWaitForOptions
+        {
+            State = WaitForSelectorState.Visible,
+            Timeout = _settings.StandardTimeoutMs
+        });
+    }
+
+    /// <summary>Chọn Country trong modal (mở combo, gõ, chọn option).</summary>
+    public async Task SelectAddCompaniesModalCountryAsync(string displayText)
+    {
+        await AddCompaniesModalCountryDropdownButton.First.ClickAsync();
+        await AddCompaniesModalCountryComboInput.First.ClickAsync();
+        await AddCompaniesModalCountryComboInput.First.FillAsync(displayText);
+        await _page.WaitForTimeoutAsync(500);
+
+        ILocator option = _page.GetByRole(AriaRole.Option, new() { Name = displayText });
+        if (await option.CountAsync() == 0)
+            option = _page.GetByRole(AriaRole.Option).Filter(new LocatorFilterOptions { HasTextString = displayText });
+        if (await option.CountAsync() == 0)
+            option = _page.Locator(".dxbl-list-box-item", new() { HasText = displayText });
+
+        await option.First.WaitForAsync(new LocatorWaitForOptions
+        {
+            State = WaitForSelectorState.Visible,
+            Timeout = _settings.StandardTimeoutMs
+        });
+        await option.First.ClickAsync();
     }
 
     // ===== Support methods =====
