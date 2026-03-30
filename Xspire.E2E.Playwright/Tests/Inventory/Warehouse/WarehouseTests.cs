@@ -89,5 +89,13 @@ public class WarehouseTests : IClassFixture<TestBase>
         // HTML: <input name="ne_Txt_Code" ...>
         // HTML: <input name="ne_Txt_Description" ...>
         await newPage.FillCodeAndDescriptionAsync("123", "123");
+
+        // Nhấn checkbox Active
+        // HTML: <input type="checkbox" name="ne_Chk_Active" ...>
+        await newPage.CheckboxActive.First.ClickAsync();
+
+        // Nhấn checkbox Is Public
+        // HTML: <input type="checkbox" name="ne_Chk_IsPublic" ...>
+        await newPage.CheckboxIsPublic.First.ClickAsync();
     }
 }

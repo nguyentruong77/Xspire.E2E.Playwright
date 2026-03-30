@@ -94,9 +94,9 @@ public class WarehouseNewPage
     public ILocator WebTextEditActionButton =>
         _page.Locator("dxbl-input-editor#ne_Txt_Web").Locator("button.dxbl-text-edit-btn");
 
-    public ILocator CheckboxActive => _page.Locator("input[type='checkbox'][name='ne_Chk_Active']");
+    public ILocator CheckboxActive => _page.Locator("input[type='checkbox'][name='ne_Chk_Active']").Filter(new LocatorFilterOptions { Visible = true });
 
-    public ILocator CheckboxIsPublic => _page.Locator("input[type='checkbox'][name='ne_Chk_IsPublic']");
+    public ILocator CheckboxIsPublic => _page.Locator("input[type='checkbox'][name='ne_Chk_IsPublic']").Filter(new LocatorFilterOptions { Visible = true });
 
     // ===== DevExpress checkbox display view (dxbl-checkbox) =====
     // DevExpress thường render wrapper `div.dxbl-checkbox[role='checkbox']` với `aria-disabled`/`aria-checked`.
